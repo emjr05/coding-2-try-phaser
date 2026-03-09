@@ -20,7 +20,7 @@ export class Level1 extends Scene {
 
     private score = 0;
     private scoreText?: Phaser.GameObjects.Text;
-    private gameOver = false;
+
     //phaserLogo: PhaserLogo;
     //fpsText: FpsText;
 
@@ -124,7 +124,7 @@ export class Level1 extends Scene {
         EventBus.emit("current-scene-ready", this);*/
     }
 
-    private handleCollectStar = (player: Collidable, s: Collidable): void => {
+    private handleCollectStar = (_player: Collidable, s: Collidable): void => {
         const star = s as Phaser.Physics.Arcade.Image;
         star.disableBody(true, true);
         this.score += 10;
@@ -156,7 +156,6 @@ export class Level1 extends Scene {
         this.physics.pause();
         this.player?.setTint(0xff0000);
         this.player?.anims.play("turn");
-        this.gameOver = true;
         this.time.delayedCall(1000, () => {
             this.changeScene();
         });
