@@ -2,7 +2,9 @@
 import { Scene } from "phaser";
 export type Collidable =
     | Phaser.Types.Physics.Arcade.GameObjectWithBody
-    | Phaser.Tilemaps.Tile;
+    | Phaser.Tilemaps.Tile
+    | Phaser.Physics.Arcade.Body
+    | Phaser.Physics.Arcade.StaticBody;
 
 //import PhaserLogo from "../objects/phaser-logo";
 //import FpsText from "../objects/fps-text";
@@ -105,7 +107,7 @@ export class Level1 extends Scene {
         this.physics.add.collider(
             this.player,
             this.bombs,
-            this.handleHitBomb,
+            this.handleHitBomb.bind(this),
             undefined,
             this,
         );
@@ -122,7 +124,7 @@ export class Level1 extends Scene {
         EventBus.emit("current-scene-ready", this);*/
     }
 
-    private handleCollectStar(player: Collidable, s: Collidable) {
+    private handleCollectStar = (player: Collidable, s: Collidable): void => {
         const star = s as Phaser.Physics.Arcade.Image;
         star.disableBody(true, true);
         this.score += 10;
@@ -148,9 +150,9 @@ export class Level1 extends Scene {
                 bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
             }
         }
-    }
+    };
 
-    private handleHitBomb(player: Collidable, b: Collidable) {
+    private handleHitBomb() {
         this.physics.pause();
         this.player?.setTint(0xff0000);
         this.player?.anims.play("turn");
