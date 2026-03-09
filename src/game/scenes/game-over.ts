@@ -13,12 +13,12 @@ export class GameOver extends Scene {
     create() {
         this.camera = this.cameras.main;
         this.camera.setBackgroundColor(0xff0000);
-
-        this.background = this.add.image(512, 384, "background");
+        const { centerX, centerY } = this.camera;
+        this.background = this.add.image(centerX, centerY, "background");
         this.background.setAlpha(0.5);
 
         this.gameOverText = this.add
-            .text(512, 384, "Game Over", {
+            .text(centerX, centerY, "Game Over", {
                 fontFamily: "Arial Black",
                 fontSize: 64,
                 color: "#ffffff",
@@ -29,11 +29,16 @@ export class GameOver extends Scene {
             .setOrigin(0.5)
             .setDepth(100);
 
-        const returnMenuButton = this.add.text(512, 540, "Return to Menu", {
-            fontFamily: "Arial Black",
-            fontSize: 28,
-            color: "#000000",
-        });
+        const returnMenuButton = this.add.text(
+            centerX,
+            centerY + 100,
+            "Return to Menu",
+            {
+                fontFamily: "Arial Black",
+                fontSize: 28,
+                color: "#000000",
+            },
+        );
         returnMenuButton.setOrigin(0.5);
         returnMenuButton.setInteractive({ useHandCursor: true });
         returnMenuButton.on("pointerdown", () => this.changeScene());

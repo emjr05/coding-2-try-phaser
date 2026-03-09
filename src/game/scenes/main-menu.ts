@@ -14,12 +14,13 @@ export class MainMenu extends Scene implements ChangeableScene {
     }
 
     create() {
-        this.background = this.add.image(512, 384, "background");
+        const { centerX, centerY } = this.cameras.main;
+        this.background = this.add.image(centerX, centerY, "background");
 
-        this.logo = this.add.image(512, 300, "logo").setDepth(100);
+        this.logo = this.add.image(centerX, centerY - 84, "logo").setDepth(100);
 
         this.title = this.add
-            .text(512, 460, "Main Menu", {
+            .text(centerX, centerY + 84, "Main Menu", {
                 fontFamily: "Arial Black",
                 fontSize: 38,
                 color: "#ffffff",
@@ -31,11 +32,16 @@ export class MainMenu extends Scene implements ChangeableScene {
             .setDepth(100);
 
         EventBus.emit("current-scene-ready", this);
-        const startButton = this.add.text(512, 540, "Start Game", {
-            fontFamily: "Arial Black",
-            fontSize: 28,
-            color: "#000000",
-        });
+        const startButton = this.add.text(
+            centerX,
+            centerY + 200,
+            "Start Game",
+            {
+                fontFamily: "Arial Black",
+                fontSize: 28,
+                color: "#000000",
+            },
+        );
         startButton.setOrigin(0.5);
         startButton.setInteractive({ useHandCursor: true });
         startButton.on("pointerdown", () => this.changeScene());
