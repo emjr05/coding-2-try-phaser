@@ -29,6 +29,15 @@ export class GameOver extends Scene {
             .setOrigin(0.5)
             .setDepth(100);
 
+        const returnMenuButton = this.add.text(512, 540, "Return to Menu", {
+            fontFamily: "Arial Black",
+            fontSize: 28,
+            color: "#000000",
+        });
+        returnMenuButton.setOrigin(0.5);
+        returnMenuButton.setInteractive({ useHandCursor: true });
+        returnMenuButton.on("pointerdown", () => this.changeScene());
+
         EventBus.emit("current-scene-ready", this);
     }
 

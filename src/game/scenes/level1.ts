@@ -157,6 +157,9 @@ export class Level1 extends Scene {
         this.player?.setTint(0xff0000);
         this.player?.anims.play("turn");
         this.gameOver = true;
+        this.time.delayedCall(1000, () => {
+            this.changeScene();
+        });
     }
     update() {
         //    this.fpsText.update();

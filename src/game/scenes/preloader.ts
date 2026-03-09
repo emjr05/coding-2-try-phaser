@@ -46,6 +46,6 @@ export class Preloader extends Scene {
         //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
         //this.add.image(400, 300, "sky");
         //this.add.image(400, 300, "star");
-        this.scene.start("Level1");
+        this.scene.start("MainMenu");
     }
 }

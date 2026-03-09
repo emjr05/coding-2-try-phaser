@@ -31,6 +31,14 @@ export class MainMenu extends Scene implements ChangeableScene {
             .setDepth(100);
 
         EventBus.emit("current-scene-ready", this);
+        const startButton = this.add.text(512, 540, "Start Game", {
+            fontFamily: "Arial Black",
+            fontSize: 28,
+            color: "#000000",
+        });
+        startButton.setOrigin(0.5);
+        startButton.setInteractive({ useHandCursor: true });
+        startButton.on("pointerdown", () => this.changeScene());
     }
 
     changeScene() {
